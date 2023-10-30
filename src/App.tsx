@@ -4,6 +4,7 @@ import { Task, User } from "./types";
 import { HomePage, CalendarPage, LoginPage } from "./pages";
 import "./App.css";
 import React from "react";
+import { Header } from "./components";
 
 // all routes should get User(s)
 const routes = ["home", "calendar"];
@@ -23,18 +24,26 @@ function App() {
     sessionStorage.setItem("currentUser", JSON.stringify(user));
   };
 
+  const logout = () => {
+    setCurrentUser(null);
+    sessionStorage.removeItem("currentUser");
+  };
+
   return (
     <>
       <Router>
-        {/* <Header links={routes.map((name) => name)} /> */}
+        {currentUser ? <Header user={currentUser} logout={logout} /> : null}
 
         {!currentUser ? (
           <LoginPage setUser={onSetCurrentUser} />
         ) : (
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/calendar" element={<CalendarPage />} />
+            <Route path="/" element={<HomePage user={currentUser} />} />
+            <Route path="/home" element={<HomePage user={currentUser} />} />
+            <Route
+              path="/calendar"
+              element={<CalendarPage user={currentUser} />}
+            />
           </Routes>
         )}
       </Router>
