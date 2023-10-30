@@ -1,8 +1,10 @@
-import React from "react";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
+
+import { Task, User } from "./types";
 import { HomePage, CalendarPage } from "./pages";
 import "./App.css";
 
+// all routes should get User(s)
 const routes = ["home", "calendar"];
 
 function App() {
