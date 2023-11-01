@@ -55,7 +55,7 @@ const LoginPage = ({ setUser, loginUser }: LoginPageInterface) => {
 
   return (
     <>
-      <h1>Register or login</h1>
+      <h3>Register or login</h3>
       <br />
       <label>Username: </label>
       <input placeholder={"username"} onChange={updateUsername} />

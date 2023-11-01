@@ -72,7 +72,7 @@ function App() {
   return (
     <div id="base">
       <Router>
-        {currentUser ? <Header /> : null}
+        <Header />
 
         {!currentUser ? (
           <LoginPage setUser={registerUser} loginUser={loginUser} />
