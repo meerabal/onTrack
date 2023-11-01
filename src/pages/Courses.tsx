@@ -12,7 +12,7 @@ const CoursePage = ({ user, addCourse }: CoursePageInterface) => {
   const navigate = useNavigate();
 
   const courseName = React.useRef<string>("");
-  const [colorState, setColorState] = React.useState("#fff");
+  const [colorState, setColorState] = React.useState("");
   const [colorPicker, setColorPicker] = React.useState(false);
 
   const updateCourseName = (event: any) => {
@@ -44,7 +44,8 @@ const CoursePage = ({ user, addCourse }: CoursePageInterface) => {
 
   return (
     <>
-      <p>Hello {user.username}! Here's your courses:</p>
+      <h3>Hello {user.username}! Here's your courses:</h3>
+      {user.courses.length < 1 && <p>You have no courses added yet</p>}
       {user.courses.map((course: Course) => {
         return (
           <>
@@ -65,17 +66,20 @@ const CoursePage = ({ user, addCourse }: CoursePageInterface) => {
           onChange={updateCourseName}
         />
       </div>
-      <label style={{ color: colorState }}>Color selected</label>
+      <br />
+      <button onClick={handleSelectColor} className="small-button">
+        Select color
+      </button>
+      <strong style={{ color: colorState }}>
+        {colorState === "" ? "No color selected yet" : "Color selected"}
+      </strong>
       {colorPicker && (
         <SketchPicker
           color={colorState}
           onChangeComplete={handleChangeComplete}
         />
       )}
-      <button onClick={handleSelectColor} className="small-button">
-        Select color
-      </button>
-
+      <br />
       <button onClick={onAddCourse} className="small-button">
         Add course
       </button>

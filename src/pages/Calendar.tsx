@@ -29,9 +29,10 @@ const CalendarPage = ({
   return (
     <>
       <Calendar className="calendar" onChange={onChange} value={value} />
-      <h2>Hello {user.username}! Here's your Calendar</h2>
+      <h2>Upcoming events</h2>
       <label>Date selected: {value.toDateString()}</label>
       <br />
+      {user.events.length < 1 && <p>No events on this day</p>}
       {value &&
         user.events.map((task: Task) => {
           return (
