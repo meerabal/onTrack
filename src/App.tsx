@@ -12,9 +12,6 @@ import "./App.css";
 import React from "react";
 import { Header, Footer } from "./components";
 
-// all routes should get User(s)
-const routes = ["home", "calendar"];
-
 function App() {
   const userList = React.useRef<User[]>([]);
   const courseList = React.useRef<any>({});

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Course, User } from "../types";
 import { SketchPicker } from "react-color";
 import React from "react";
