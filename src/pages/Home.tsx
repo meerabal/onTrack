@@ -8,7 +8,12 @@ interface HomePageInterface {
 const HomePage = ({ user }: HomePageInterface) => (
   <>
     <p>Welcome to your home page {user.username}!</p>
-    <Link to="/calendar">Go to calendar</Link>
+    <Link to="/calendar">
+      <button>Schedule</button>
+    </Link>
+    <Link to="/event/add">
+      <button>Add Event</button>
+    </Link>
   </>
 );
 

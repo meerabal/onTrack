@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { Task, User } from "./types";
-import { HomePage, CalendarPage, LoginPage } from "./pages";
+import { HomePage, CalendarPage, LoginPage, AddEventPage } from "./pages";
 import "./App.css";
 import React from "react";
 import { Header } from "./components";
@@ -10,23 +10,32 @@ import { Header } from "./components";
 const routes = ["home", "calendar"];
 
 function App() {
-  let loggedInUserString = sessionStorage.getItem("currentUser");
-  const loggedInUser = loggedInUserString
-    ? JSON.parse(loggedInUserString)
-    : null;
+  const userList = React.useRef<User[]>([]);
+  const [currentUser, setCurrentUser] = React.useState<User | null>();
 
-  const [currentUser, setCurrentUser] = React.useState<User | null>(
-    loggedInUser
-  );
-
-  const onSetCurrentUser = (user: User) => {
+  const registerUser = (user: User) => {
+    userList.current.push(user);
     setCurrentUser(user);
-    sessionStorage.setItem("currentUser", JSON.stringify(user));
+  };
+
+  const loginUser = (username: string, password: string) => {
+    console.log(userList.current);
+    for (const user of userList.current) {
+      if (user.username === username && user.password === password) {
+        setCurrentUser(user);
+      }
+      return true;
+    }
+    return false;
   };
 
   const logout = () => {
     setCurrentUser(null);
-    sessionStorage.removeItem("currentUser");
+  };
+
+  const addEvent = (task: Task) => {
+    currentUser?.events.push(task);
+    currentUser && setCurrentUser(currentUser);
   };
 
   return (
@@ -35,7 +44,7 @@ function App() {
         {currentUser ? <Header user={currentUser} logout={logout} /> : null}
 
         {!currentUser ? (
-          <LoginPage setUser={onSetCurrentUser} />
+          <LoginPage setUser={registerUser} getUser={loginUser} />
         ) : (
           <Routes>
             <Route path="/" element={<HomePage user={currentUser} />} />
@@ -43,6 +52,10 @@ function App() {
             <Route
               path="/calendar"
               element={<CalendarPage user={currentUser} />}
+            />
+            <Route
+              path="/event/add"
+              element={<AddEventPage user={currentUser} addEvent={addEvent} />}
             />
           </Routes>
         )}
