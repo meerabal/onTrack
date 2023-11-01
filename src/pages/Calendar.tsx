@@ -3,6 +3,8 @@ import "react-calendar/dist/Calendar.css";
 import React from "react";
 import { Task, User } from "../types";
 
+/* schedule page with events for the selected date
+  currently only supports month view */
 interface CalendarPageInterface {
   user: User;
   completeEvent: (task: Task) => void;

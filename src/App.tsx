@@ -12,16 +12,19 @@ import "./App.css";
 import React from "react";
 import { Header, Footer } from "./components";
 
+/* The base of the entire app */
 function App() {
   const userList = React.useRef<User[]>([]);
   const courseList = React.useRef<any>({});
   const [currentUser, setCurrentUser] = React.useState<User | null>();
 
+  /* adds user to the user list and sets them as current user */
   const registerUser = (user: User) => {
     userList.current.push(user);
     setCurrentUser(user);
   };
 
+  /* if user exists, sets them as current user */
   const loginUser = (username: string, password: string) => {
     for (const user of userList.current) {
       if (user.username === username && user.password === password) {
@@ -32,21 +35,25 @@ function App() {
     return false;
   };
 
+  /* logs out the user */
   const logout = () => {
     setCurrentUser(null);
   };
 
+  /* adds an event to the current user's list of events */
   const addEvent = (task: Task) => {
     currentUser?.events.push(task);
     currentUser && setCurrentUser(currentUser);
   };
 
+  /* adds a course to the current user's list of courses */
   const addCourse = (course: Course) => {
     currentUser?.courses.push(course);
     courseList.current[course.name] = course;
     currentUser && setCurrentUser(currentUser);
   };
 
+  /* marks an event as complete */
   const completeEvent = (task: Task) => {
     if (!currentUser?.events) {
       return;

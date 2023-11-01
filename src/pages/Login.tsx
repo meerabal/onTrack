@@ -2,6 +2,7 @@ import React from "react";
 import { User } from "../types";
 import { useNavigate } from "react-router-dom";
 
+/* Login / register page for the user */
 interface LoginPageInterface {
   setUser: (user: User) => void;
   loginUser: (username: string, password: string) => boolean;
@@ -21,6 +22,7 @@ const LoginPage = ({ setUser, loginUser }: LoginPageInterface) => {
     password.current = event.target.value;
   };
 
+  /* registers the user if they do not exist, else logs them in */
   const register = () => {
     if (username.current === "" || password.current === "") {
       alert("Please check your input");
@@ -38,6 +40,7 @@ const LoginPage = ({ setUser, loginUser }: LoginPageInterface) => {
     navigate("/");
   };
 
+  /* logs in the user if they exist */
   const login = () => {
     if (username.current === "" || password.current === "") {
       alert("Please check your input");
@@ -58,7 +61,11 @@ const LoginPage = ({ setUser, loginUser }: LoginPageInterface) => {
       <input placeholder={"username"} onChange={updateUsername} />
       <br />
       <label>Password: </label>
-      <input placeholder={"password"} onChange={updatePassword} />
+      <input
+        type="password"
+        placeholder={"password"}
+        onChange={updatePassword}
+      />
       <br />
       <button onClick={register} className="small-button">
         Register

@@ -3,6 +3,7 @@ import { Course, User } from "../types";
 import { SketchPicker } from "react-color";
 import React from "react";
 
+/* course page with current courses and option to add courses */
 interface CoursePageInterface {
   user: User;
   addCourse: (course: Course) => void;
@@ -11,14 +12,18 @@ interface CoursePageInterface {
 const CoursePage = ({ user, addCourse }: CoursePageInterface) => {
   const navigate = useNavigate();
 
+  // keeps track of the course name entered
   const courseName = React.useRef<string>("");
+  // keeps track of the color selected
   const [colorState, setColorState] = React.useState("");
+  // keeps track of whether the color picker is open or closed
   const [colorPicker, setColorPicker] = React.useState(false);
 
   const updateCourseName = (event: any) => {
     courseName.current = event.target.value;
   };
 
+  /* adds course and updates the course list */
   const onAddCourse = () => {
     if (courseName.current === "") {
       alert("Please enter course name");

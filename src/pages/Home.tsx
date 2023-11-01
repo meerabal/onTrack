@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { User } from "../types";
 
+/* home page of the user */
 interface HomePageInterface {
   user: User;
 }
 
 const HomePage = ({ user }: HomePageInterface) => {
+  // keeps track of the next upcoming event as a Date object
   const upcomingEvent =
     user.events.length > 0
       ? user.events.reduce((task1, task2) =>

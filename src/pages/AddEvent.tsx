@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
+/* page to add a new event to the schedule */
 interface AddEventPageInterface {
   user: User;
   addEvent: (task: Task) => void;
@@ -39,7 +40,6 @@ const AddEventPage = ({ user, addEvent }: AddEventPageInterface) => {
       date: value, // TODO: date custom
       complete: false,
     };
-    console.log(newEvent);
     user.events.push(newEvent);
     navigate("/calendar");
   };

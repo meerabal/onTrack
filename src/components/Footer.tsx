@@ -4,6 +4,7 @@ interface FooterInterface {
   logout: () => void;
 }
 
+/* provides the navigation buttons (calendar, home, logout) at the bottom */
 const Footer = ({ logout }: FooterInterface) => (
   <div style={{ paddingTop: "20px" }}>
     <Link to="/calendar">
