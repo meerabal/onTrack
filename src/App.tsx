@@ -49,6 +49,21 @@ function App() {
     currentUser && setCurrentUser(currentUser);
   };
 
+  const completeEvent = (task: Task) => {
+    if (!currentUser?.events) {
+      return;
+    }
+    let tempCurrentUser = { ...currentUser };
+    for (let i = 0; i < currentUser.events.length; i++) {
+      let event = tempCurrentUser.events[i];
+      if (event.name === task.name && event.course === task.course) {
+        tempCurrentUser.events[i].complete = task.complete;
+        setCurrentUser(tempCurrentUser);
+        break;
+      }
+    }
+  };
+
   return (
     <>
       <Router>
@@ -62,7 +77,12 @@ function App() {
             <Route path="/home" element={<HomePage user={currentUser} />} />
             <Route
               path="/calendar"
-              element={<CalendarPage user={currentUser} />}
+              element={
+                <CalendarPage
+                  user={currentUser}
+                  completeEvent={completeEvent}
+                />
+              }
             />
             <Route
               path="/event/add"

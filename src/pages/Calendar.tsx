@@ -6,13 +6,19 @@ import { Task, User } from "../types";
 
 interface CalendarPageInterface {
   user: User;
+  completeEvent: (task: Task) => void;
 }
 
-const CalendarPage = ({ user }: CalendarPageInterface) => {
+const CalendarPage = ({ user, completeEvent }: CalendarPageInterface) => {
   const [value, setValue] = React.useState<Date>(new Date());
 
   const onChange = (nextValue: any) => {
     setValue(nextValue);
+  };
+
+  const onChecked = (task: Task) => {
+    task.complete = !!!task.complete;
+    completeEvent(task);
   };
 
   return (
@@ -25,9 +31,24 @@ const CalendarPage = ({ user }: CalendarPageInterface) => {
         user.events.map((task: Task) => {
           return (
             task.date.toDateString() === value.toDateString() && (
-              <p>
-                {task.name} -- {task.course} -- {task.date.toDateString()}
-              </p>
+              <>
+                <input
+                  type="checkbox"
+                  defaultChecked={task.complete}
+                  onChange={() => onChecked(task)}
+                />
+                {!task.complete && (
+                  <label>
+                    {task.name} -- {task.course} -- {task.date.toDateString()}
+                  </label>
+                )}
+                {task.complete && (
+                  <s>
+                    {task.name} -- {task.course} -- {task.date.toDateString()}
+                  </s>
+                )}
+                <br />
+              </>
             )
           );
         })}

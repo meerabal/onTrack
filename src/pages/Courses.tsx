@@ -37,7 +37,7 @@ const CoursePage = ({ user, addCourse }: CoursePageInterface) => {
           </p>
         );
       })}
-      <input placeholder={"courseName"} onChange={updateCourseName} />
+      <input placeholder={"course name"} onChange={updateCourseName} />
       <button onClick={onAddCourse}>Add course</button>
       <Link to="/home">
         <button>Home</button>
