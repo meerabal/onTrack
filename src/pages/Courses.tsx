@@ -13,12 +13,17 @@ const CoursePage = ({ user, addCourse }: CoursePageInterface) => {
 
   const courseName = React.useRef<string>("");
   const [colorState, setColorState] = React.useState("#fff");
+  const [colorPicker, setColorPicker] = React.useState(false);
 
   const updateCourseName = (event: any) => {
     courseName.current = event.target.value;
   };
 
   const onAddCourse = () => {
+    if (courseName.current === "") {
+      alert("Please enter course name");
+      return;
+    }
     if (
       user.courses.map((course) => course.name).includes(courseName.current)
     ) {
@@ -33,6 +38,10 @@ const CoursePage = ({ user, addCourse }: CoursePageInterface) => {
     setColorState(color.hex);
   };
 
+  const handleSelectColor = () => {
+    setColorPicker(() => !colorPicker);
+  };
+
   return (
     <>
       <p>Hello {user.username}! Here's your courses</p>
@@ -45,10 +54,14 @@ const CoursePage = ({ user, addCourse }: CoursePageInterface) => {
         );
       })}
       <input placeholder={"course name"} onChange={updateCourseName} />
-      <SketchPicker
-        color={colorState}
-        onChangeComplete={handleChangeComplete}
-      />
+      <label style={{ color: colorState }}>Color selected</label>
+      {colorPicker && (
+        <SketchPicker
+          color={colorState}
+          onChangeComplete={handleChangeComplete}
+        />
+      )}
+      <button onClick={handleSelectColor}>Select color</button>
 
       <button onClick={onAddCourse}>Add course</button>
       <Link to="/home">
