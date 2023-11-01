@@ -14,6 +14,9 @@ const HomePage = ({ user }: HomePageInterface) => (
     <Link to="/event/add">
       <button>Add Event</button>
     </Link>
+    <Link to="/courses">
+      <button>Courses</button>
+    </Link>
   </>
 );
 

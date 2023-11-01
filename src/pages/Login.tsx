@@ -30,6 +30,7 @@ const LoginPage = ({ setUser, getUser }: LoginPageInterface) => {
       username: username.current,
       password: password.current,
       events: [],
+      courses: [],
     };
     setUser(newUser);
     navigate("/");

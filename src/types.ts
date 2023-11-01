@@ -1,6 +1,6 @@
 export interface Course {
   name: string;
-  color: string;
+  color?: string;
 }
 
 export interface Task {
@@ -16,4 +16,5 @@ export interface User {
   username: string;
   password: string;
   events: Task [];
+  courses: Course [];
 }

@@ -1,7 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import { Task, User } from "./types";
-import { HomePage, CalendarPage, LoginPage, AddEventPage } from "./pages";
+import { Course, Task, User } from "./types";
+import {
+  HomePage,
+  CalendarPage,
+  LoginPage,
+  AddEventPage,
+  CoursePage,
+} from "./pages";
 import "./App.css";
 import React from "react";
 import { Header } from "./components";
@@ -38,6 +44,11 @@ function App() {
     currentUser && setCurrentUser(currentUser);
   };
 
+  const addCourse = (course: Course) => {
+    currentUser?.courses.push(course);
+    currentUser && setCurrentUser(currentUser);
+  };
+
   return (
     <>
       <Router>
@@ -56,6 +67,10 @@ function App() {
             <Route
               path="/event/add"
               element={<AddEventPage user={currentUser} addEvent={addEvent} />}
+            />
+            <Route
+              path="/courses"
+              element={<CoursePage user={currentUser} addCourse={addCourse} />}
             />
           </Routes>
         )}
