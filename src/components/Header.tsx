@@ -1,14 +1,7 @@
 import { User } from "../types";
 
-interface HeaderInterface {
-  user: User;
-  logout: () => void;
-}
+interface HeaderInterface {}
 
-const Header = ({ user, logout }: HeaderInterface) => (
-  <>
-    <button onClick={logout}>Logout</button>
-  </>
-);
+const Header = ({}: HeaderInterface) => <h1>OnTrack</h1>;
 
 export default Header;

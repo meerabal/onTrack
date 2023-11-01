@@ -28,7 +28,7 @@ const CalendarPage = ({
 
   return (
     <>
-      <Calendar onChange={onChange} value={value} />
+      <Calendar className="calendar" onChange={onChange} value={value} />
       <h2>Hello {user.username}! Here's your Calendar</h2>
       <label>Date selected: {value.toDateString()}</label>
       <br />
@@ -36,7 +36,7 @@ const CalendarPage = ({
         user.events.map((task: Task) => {
           return (
             task.date.toDateString() === value.toDateString() && (
-              <div style={{ flexDirection: "row" }}>
+              <div className="row-div">
                 <input
                   type="checkbox"
                   defaultChecked={task.complete}
@@ -57,9 +57,6 @@ const CalendarPage = ({
             )
           );
         })}
-      <Link to="/home">
-        <button>Home</button>
-      </Link>
     </>
   );
 };

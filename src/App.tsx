@@ -10,7 +10,7 @@ import {
 } from "./pages";
 import "./App.css";
 import React from "react";
-import { Header } from "./components";
+import { Header, Footer } from "./components";
 
 // all routes should get User(s)
 const routes = ["home", "calendar"];
@@ -26,12 +26,11 @@ function App() {
   };
 
   const loginUser = (username: string, password: string) => {
-    console.log(userList.current);
     for (const user of userList.current) {
       if (user.username === username && user.password === password) {
         setCurrentUser(user);
+        return true;
       }
-      return true;
     }
     return false;
   };
@@ -69,7 +68,7 @@ function App() {
   return (
     <div id="base">
       <Router>
-        {currentUser ? <Header user={currentUser} logout={logout} /> : null}
+        {currentUser ? <Header /> : null}
 
         {!currentUser ? (
           <LoginPage setUser={registerUser} loginUser={loginUser} />
@@ -97,6 +96,7 @@ function App() {
             />
           </Routes>
         )}
+        {currentUser ? <Footer logout={logout} /> : null}
       </Router>
     </div>
   );

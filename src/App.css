@@ -4,10 +4,61 @@
 
 #base {
   display: flex;
-  padding-top: 4em;
+  padding-top: 2em;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+button:not(.calendar *) {
+  background-color: #aed1ea;
+  border: none;
+  color: black;
+  border-radius: 10px;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+button:active:not(.calendar *) {
+  background-color: #0c2c42;
+  color: white;
+  cursor: pointer;
+}
+
+button.small-button {
+  padding: 5px 10px;
+  background-color: #aeeac8;
+  border: none;
+  color: black;
+}
+
+button.small-button:active {
+  background-color: #0c420c;
+  color: white;
+  cursor: pointer;
+}
+
+button.footer-button {
+  padding: 10px 10px;
+  background-color: #eaaee3;
+  border: none;
+  color: black;
+}
+
+button.footer-button:active {
+  background-color: #3f0c42;
+  color: white;
+  cursor: pointer;
+}
+.row-div {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: "row";
 }
 
 .App-logo {

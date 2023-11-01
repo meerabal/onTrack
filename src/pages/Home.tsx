@@ -6,13 +6,16 @@ interface HomePageInterface {
 }
 
 const HomePage = ({ user }: HomePageInterface) => {
-  const upcomingEvent = user.events.reduce((task1, task2) =>
-    task1.date < task2.date ? task1 : task2
-  );
+  const upcomingEvent =
+    user.events.length > 0
+      ? user.events.reduce((task1, task2) =>
+          task1.date < task2.date ? task1 : task2
+        )
+      : null;
 
   return (
     <>
-      <h2>Welcome to your home page {user.username}!</h2>
+      <h2>Welcome {user.username}!</h2>
       <Link to="/calendar">
         <button>Schedule</button>
       </Link>
@@ -22,10 +25,14 @@ const HomePage = ({ user }: HomePageInterface) => {
       <Link to="/courses">
         <button>Courses</button>
       </Link>
-      <p>
-        Upcoming event: {upcomingEvent.name} --{" "}
-        {upcomingEvent.date.toDateString()} -- {upcomingEvent.course}
-      </p>
+      {upcomingEvent ? (
+        <p>
+          Upcoming event: {upcomingEvent.name} --{" "}
+          {upcomingEvent.date.toDateString()} -- {upcomingEvent.course}
+        </p>
+      ) : (
+        "No upcoming events"
+      )}
     </>
   );
 };

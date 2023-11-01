@@ -47,25 +47,28 @@ const AddEventPage = ({ user, addEvent }: AddEventPageInterface) => {
   return (
     <>
       <h1>New Event</h1>
-
-      <label>Name: </label>
-      <input placeholder={"event name"} onChange={updateName} />
-      <label>Course: </label>
-      <select value={courseState} name="course" onChange={updateCourse}>
-        <option></option>
-        {user.courses.map((course) => (
-          <option style={{ color: course.color }}>{course.name}</option>
-        ))}
-      </select>
-      <Calendar onChange={onChange} value={value} />
+      <div className="div-row">
+        <label>Name: </label>
+        <input placeholder={"event name"} onChange={updateName} />
+      </div>
+      <div className="div-row">
+        <label>Course: </label>
+        <select value={courseState} name="course" onChange={updateCourse}>
+          <option></option>
+          {user.courses.map((course) => (
+            <option style={{ color: course.color }}>{course.name}</option>
+          ))}
+        </select>
+      </div>
+      <br />
+      <Calendar className="calendar" onChange={onChange} value={value} />
       <label>Date selected: {value.toDateString()}</label>
       <br />
-      <button onClick={onAdd}>Add Event</button>
-      <Link to="/calendar">
-        <button>Back to Calendar</button>
-      </Link>
+      <button onClick={onAdd} className="small-button">
+        Add Event
+      </button>
       <Link to="/courses">
-        <button>Add a course</button>
+        <button className="small-button">Add a course</button>
       </Link>
     </>
   );

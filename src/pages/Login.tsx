@@ -26,16 +26,15 @@ const LoginPage = ({ setUser, loginUser }: LoginPageInterface) => {
       alert("Please check your input");
       return;
     }
-    if (loginUser(username.current, password.current)) {
-      return;
+    if (!loginUser(username.current, password.current)) {
+      const newUser = {
+        username: username.current,
+        password: password.current,
+        events: [],
+        courses: [],
+      };
+      setUser(newUser);
     }
-    const newUser = {
-      username: username.current,
-      password: password.current,
-      events: [],
-      courses: [],
-    };
-    setUser(newUser);
     navigate("/");
   };
 
@@ -61,8 +60,12 @@ const LoginPage = ({ setUser, loginUser }: LoginPageInterface) => {
       <label>Password: </label>
       <input placeholder={"password"} onChange={updatePassword} />
       <br />
-      <button onClick={register}>Register</button>
-      <button onClick={login}>Login</button>
+      <button onClick={register} className="small-button">
+        Register
+      </button>
+      <button onClick={login} className="small-button">
+        Login
+      </button>
     </>
   );
 };

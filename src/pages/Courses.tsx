@@ -44,16 +44,27 @@ const CoursePage = ({ user, addCourse }: CoursePageInterface) => {
 
   return (
     <>
-      <p>Hello {user.username}! Here's your courses</p>
+      <p>Hello {user.username}! Here's your courses:</p>
       {user.courses.map((course: Course) => {
         return (
           <>
-            <label style={{ color: course.color }}>{course.name}</label>
+            <label key={course.name} style={{ color: course.color }}>
+              {course.name}
+            </label>
             <br />
           </>
         );
       })}
-      <input placeholder={"course name"} onChange={updateCourseName} />
+      <br />
+      <h3>Add a course:</h3>
+      <div className="div-row">
+        <label>Course name: </label>
+        <input
+          size={7}
+          placeholder={"course name"}
+          onChange={updateCourseName}
+        />
+      </div>
       <label style={{ color: colorState }}>Color selected</label>
       {colorPicker && (
         <SketchPicker
@@ -61,12 +72,13 @@ const CoursePage = ({ user, addCourse }: CoursePageInterface) => {
           onChangeComplete={handleChangeComplete}
         />
       )}
-      <button onClick={handleSelectColor}>Select color</button>
+      <button onClick={handleSelectColor} className="small-button">
+        Select color
+      </button>
 
-      <button onClick={onAddCourse}>Add course</button>
-      <Link to="/home">
-        <button>Home</button>
-      </Link>
+      <button onClick={onAddCourse} className="small-button">
+        Add course
+      </button>
     </>
   );
 };
