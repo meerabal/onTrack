@@ -2,6 +2,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import React from "react";
 import { Task, User } from "../types";
+import { Link } from "react-router-dom";
 
 /* schedule page with events for the selected date
   currently only supports month view */
@@ -59,6 +60,9 @@ const CalendarPage = ({
             )
           );
         })}
+      <Link to="/event/add">
+        <button className="small-button">Add an event</button>
+      </Link>
     </>
   );
 };
