@@ -72,7 +72,7 @@ function App() {
         {currentUser ? <Header user={currentUser} logout={logout} /> : null}
 
         {!currentUser ? (
-          <LoginPage setUser={registerUser} getUser={loginUser} />
+          <LoginPage setUser={registerUser} loginUser={loginUser} />
         ) : (
           <Routes>
             <Route path="/" element={<HomePage user={currentUser} />} />

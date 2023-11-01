@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 interface LoginPageInterface {
   setUser: (user: User) => void;
-  getUser: (username: string, password: string) => boolean;
+  loginUser: (username: string, password: string) => boolean;
 }
 
-const LoginPage = ({ setUser, getUser }: LoginPageInterface) => {
+const LoginPage = ({ setUser, loginUser }: LoginPageInterface) => {
   const navigate = useNavigate();
 
   const username = React.useRef<string>("");
@@ -26,6 +26,9 @@ const LoginPage = ({ setUser, getUser }: LoginPageInterface) => {
       alert("Please check your input");
       return;
     }
+    if (loginUser(username.current, password.current)) {
+      return;
+    }
     const newUser = {
       username: username.current,
       password: password.current,
@@ -41,7 +44,7 @@ const LoginPage = ({ setUser, getUser }: LoginPageInterface) => {
       alert("Please check your input");
       return;
     }
-    if (getUser(username.current, password.current)) {
+    if (loginUser(username.current, password.current)) {
       navigate("/");
     } else {
       alert("You do not have an account, please register");
@@ -50,7 +53,7 @@ const LoginPage = ({ setUser, getUser }: LoginPageInterface) => {
 
   return (
     <>
-      <p>Hello register or login</p>
+      <h1>Register or login</h1>
       <br />
       <label>Username: </label>
       <input placeholder={"username"} onChange={updateUsername} />
