@@ -1,6 +1,8 @@
 import React from "react";
 import { Task, User } from "../types";
 import { Link, useNavigate } from "react-router-dom";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 
 interface AddEventPageInterface {
   user: User;
@@ -9,6 +11,11 @@ interface AddEventPageInterface {
 
 const AddEventPage = ({ user, addEvent }: AddEventPageInterface) => {
   const navigate = useNavigate();
+  const [value, setValue] = React.useState<Date>(new Date());
+
+  const onChange = (nextValue: any) => {
+    setValue(nextValue);
+  };
 
   const name = React.useRef<string>("");
   const [courseState, setCourseState] = React.useState<string>("");
@@ -29,7 +36,7 @@ const AddEventPage = ({ user, addEvent }: AddEventPageInterface) => {
     const newEvent = {
       name: name.current,
       course: courseState,
-      date: new Date(), // TODO: date custom
+      date: value, // TODO: date custom
       complete: false,
     };
     console.log(newEvent);
@@ -39,8 +46,8 @@ const AddEventPage = ({ user, addEvent }: AddEventPageInterface) => {
 
   return (
     <>
-      <p>New Event</p>
-      <br />
+      <h1>New Event</h1>
+
       <label>Name: </label>
       <input placeholder={"event name"} onChange={updateName} />
       <label>Course: </label>
@@ -50,11 +57,15 @@ const AddEventPage = ({ user, addEvent }: AddEventPageInterface) => {
           <option style={{ color: course.color }}>{course.name}</option>
         ))}
       </select>
-      {/* <input placeholder={"course"} onChange={updateCourse} /> */}
+      <Calendar onChange={onChange} value={value} />
+      <label>Date selected: {value.toDateString()}</label>
       <br />
       <button onClick={onAdd}>Add Event</button>
       <Link to="/calendar">
         <button>Back to Calendar</button>
+      </Link>
+      <Link to="/courses">
+        <button>Add a course</button>
       </Link>
     </>
   );

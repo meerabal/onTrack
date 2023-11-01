@@ -29,7 +29,7 @@ const CalendarPage = ({
   return (
     <>
       <Calendar onChange={onChange} value={value} />
-      <p>Hello {user.username}! Here's your Calendar</p>
+      <h2>Hello {user.username}! Here's your Calendar</h2>
       <label>Date selected: {value.toDateString()}</label>
       <br />
       {value &&
