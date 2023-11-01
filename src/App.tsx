@@ -17,6 +17,7 @@ const routes = ["home", "calendar"];
 
 function App() {
   const userList = React.useRef<User[]>([]);
+  const courseList = React.useRef<any>({});
   const [currentUser, setCurrentUser] = React.useState<User | null>();
 
   const registerUser = (user: User) => {
@@ -46,6 +47,7 @@ function App() {
 
   const addCourse = (course: Course) => {
     currentUser?.courses.push(course);
+    courseList.current[course.name] = course;
     currentUser && setCurrentUser(currentUser);
   };
 
@@ -81,6 +83,7 @@ function App() {
                 <CalendarPage
                   user={currentUser}
                   completeEvent={completeEvent}
+                  courseList={courseList.current}
                 />
               }
             />

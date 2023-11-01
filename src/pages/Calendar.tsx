@@ -7,9 +7,14 @@ import { Task, User } from "../types";
 interface CalendarPageInterface {
   user: User;
   completeEvent: (task: Task) => void;
+  courseList: any;
 }
 
-const CalendarPage = ({ user, completeEvent }: CalendarPageInterface) => {
+const CalendarPage = ({
+  user,
+  completeEvent,
+  courseList,
+}: CalendarPageInterface) => {
   const [value, setValue] = React.useState<Date>(new Date());
 
   const onChange = (nextValue: any) => {
@@ -38,12 +43,12 @@ const CalendarPage = ({ user, completeEvent }: CalendarPageInterface) => {
                   onChange={() => onChecked(task)}
                 />
                 {!task.complete && (
-                  <label>
+                  <label style={{ color: courseList[task.course]?.color }}>
                     {task.name} -- {task.course} -- {task.date.toDateString()}
                   </label>
                 )}
                 {task.complete && (
-                  <s>
+                  <s style={{ color: courseList[task.course]?.color }}>
                     {task.name} -- {task.course} -- {task.date.toDateString()}
                   </s>
                 )}

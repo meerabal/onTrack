@@ -10,6 +10,7 @@ export interface Task {
   priority?: 'high' | 'medium' | 'low',
   workPeriods?: number;
   complete: boolean;
+  color?: string;
 }
 
 export interface User { 

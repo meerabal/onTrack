@@ -13,6 +13,7 @@
     "@types/react-dom": "^18.2.14",
     "react": "^18.2.0",
     "react-calendar": "^4.6.1",
+    "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.1",
     "react-scripts": "5.0.1",
@@ -43,5 +44,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-color": "^3.0.9"
   }
 }

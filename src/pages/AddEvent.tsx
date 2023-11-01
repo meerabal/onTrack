@@ -11,27 +11,28 @@ const AddEventPage = ({ user, addEvent }: AddEventPageInterface) => {
   const navigate = useNavigate();
 
   const name = React.useRef<string>("");
-  const course = React.useRef<string>("");
+  const [courseState, setCourseState] = React.useState<string>("");
 
   const updateName = (event: any) => {
     name.current = event.target.value;
   };
 
   const updateCourse = (event: any) => {
-    course.current = event.target.value;
+    setCourseState(event.target.value);
   };
 
   const onAdd = () => {
-    if (name.current === "") {
+    if (name.current === "" || courseState === "") {
       alert("Please check your input");
       return;
     }
     const newEvent = {
       name: name.current,
-      course: course.current,
+      course: courseState,
       date: new Date(), // TODO: date custom
       complete: false,
     };
+    console.log(newEvent);
     user.events.push(newEvent);
     navigate("/calendar");
   };
@@ -43,7 +44,13 @@ const AddEventPage = ({ user, addEvent }: AddEventPageInterface) => {
       <label>Name: </label>
       <input placeholder={"event name"} onChange={updateName} />
       <label>Course: </label>
-      <input placeholder={"course"} onChange={updateCourse} />
+      <select value={courseState} name="course" onChange={updateCourse}>
+        <option></option>
+        {user.courses.map((course) => (
+          <option style={{ color: course.color }}>{course.name}</option>
+        ))}
+      </select>
+      {/* <input placeholder={"course"} onChange={updateCourse} /> */}
       <br />
       <button onClick={onAdd}>Add Event</button>
       <Link to="/calendar">
