@@ -29,7 +29,7 @@ const AddEventPage = ({ user, addEvent }: AddEventPageInterface) => {
     const newEvent = {
       name: name.current,
       course: course.current,
-      date: new Date(),
+      date: new Date(), // TODO: date custom
       complete: false,
     };
     user.events.push(newEvent);

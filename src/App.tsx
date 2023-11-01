@@ -65,7 +65,7 @@ function App() {
   };
 
   return (
-    <>
+    <div id="base">
       <Router>
         {currentUser ? <Header user={currentUser} logout={logout} /> : null}
 
@@ -95,7 +95,7 @@ function App() {
           </Routes>
         )}
       </Router>
-    </>
+    </div>
   );
 }
 

@@ -31,7 +31,7 @@ const CalendarPage = ({ user, completeEvent }: CalendarPageInterface) => {
         user.events.map((task: Task) => {
           return (
             task.date.toDateString() === value.toDateString() && (
-              <>
+              <div style={{ flexDirection: "row" }}>
                 <input
                   type="checkbox"
                   defaultChecked={task.complete}
@@ -48,7 +48,7 @@ const CalendarPage = ({ user, completeEvent }: CalendarPageInterface) => {
                   </s>
                 )}
                 <br />
-              </>
+              </div>
             )
           );
         })}
